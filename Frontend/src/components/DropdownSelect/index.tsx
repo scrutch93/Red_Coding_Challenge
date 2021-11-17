@@ -6,6 +6,7 @@ interface IProps {
     placeholder?: string;
     onSelectOption: (value?: SelectOption) => void;
     value: SelectOption | undefined;
+    
 }
 
 export type SelectOption = {
