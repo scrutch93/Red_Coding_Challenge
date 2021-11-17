@@ -12,7 +12,7 @@ export default function Home(){
         
        <div>
            
-      <DropdownSelect  options={[{label: 'customers', value: 1}]} placeholder ="ok" onSelectOption ={()=>{}} value= {{label: 'Customers', value: 1}} />
+      <DropdownSelect  options={[{label: 'Bobs Burgers', value: 1}, {label: 'Wendys', value: 1},{label: 'Amazon', value: 1}, {label: 'Coca-Cola', value: 1},{label: 'Dunder Mifflin', value: 1}]} placeholder ="ok" onSelectOption ={()=>{}} value= {{label: 'Customers', value: 1}} />
       <DropdownSelect  options={[{label: 'customers', value: 1}]} placeholder ="ok" onSelectOption ={()=>{}} value= {{label: 'Orders', value: 1}} />
     
            
