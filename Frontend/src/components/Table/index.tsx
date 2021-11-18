@@ -1,41 +1,40 @@
-import * as React from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, {useState, useEffect} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'Order ID', width: 90 },
-  {
-    field: 'creationDate',
-    headerName: 'Creation Date',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'createdBy',
-    headerName: 'Created By',
-    width: 150,
-    editable: true,
-  },
+  { field: 'orderId', headerName: 'Order ID', width: 90 },
   {
     field: 'orderType',
     headerName: 'Order Type',
     type: 'number',
     width: 110,
     editable: true,
+  }, 
+  {
+    field: 'customerName',
+    headerName: 'Customer',
+    type: 'number',
+    width: 110,
+    editable: true,
   },
   {
-    field: 'fullName',
-    headerName: 'Customer',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.getValue(params.id, 'creationDate') || ''} ${
-        params.getValue(params.id, 'createdBy') || ''
-      }`,
+    field: 'createdDate',
+    headerName: 'Creation Date',
+    width: 150,
+    editable: true,
   },
+  {
+    field: 'createdByUserName',
+    headerName: 'Created By',
+    width: 150,
+    editable: true,
+  },
+  
+  
 ];
 
-const rows = [
+/*const rows = [
   { id: 1, creationDate: 'Snow', createdBy: 'Jon', orderType: 35 },
   { id: 2, creationDate: 'Lannister', createdBy: 'Cersei', orderType: 42 },
   { id: 3, creationDate: 'Lannister', createdBy: 'Jaime', orderType: 45 },
@@ -46,12 +45,23 @@ const rows = [
   { id: 8, creationDate: 'Frances', createdBy: 'Rossini', orderType: 36 },
   { id: 9, creationDate: 'Roxie', createdBy: 'Harvey', orderType: 65 },
 ];
-
+*/
 export default function Table() {
+    
+    const [tableData, setTableData] = useState([])
+
+    useEffect(() => {
+        fetch("https://red-candidate-web.azurewebsites.net/api/Orders")
+        .then((data) => data.json())
+        .then((data) => setTableData (data))
+    })
+       
+
+
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={rows}
+        rows={tableData}
         columns={columns}
         pageSize={15}
         rowsPerPageOptions={[15]}
