@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useState, useEffect} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+require ('dotenv').config();
 
 const columns: GridColDef[] = [
   { field: 'orderId', headerName: 'Order ID', width: 90 },
