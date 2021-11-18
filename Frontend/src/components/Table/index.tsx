@@ -3,6 +3,8 @@ import React, {useState, useEffect} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 require ('dotenv').config();
 
+console.log (process.env);
+
 const columns: GridColDef[] = [
   { field: 'orderId', headerName: 'Order ID', width: 90 },
   {
