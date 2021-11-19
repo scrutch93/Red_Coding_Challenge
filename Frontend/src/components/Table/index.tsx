@@ -55,12 +55,12 @@ export default function Table() {
 
     useEffect(() => {
         fetch("https://red-candidate-web.azurewebsites.net/api/Orders", {
-  body: "‘",
+  
   headers: {
-    Accept: "*/*",
-    "Content-Type": "application/x-www-form-urlencoded"
+    ApiKey:"b7b77702-b4ec-4960-b3f7-7d40e44cf5f4",
+    Accept: 'application/json'
   },
-  method: "POST"
+  method: "GET"
 })
         .then((data) => data.json())
         .then((data) => console.log (data))

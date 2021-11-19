@@ -12092,6 +12092,11 @@
     "traverse" "~0.6.6"
     "url" "~0.11.0"
 
+"swagger-ui-dist@^4.1.0":
+  "integrity" "sha512-NVyDW2Rl0mLh1d44h/VN4beEzbopRQ2sujTmP25peBcCt9AGB96bF4fCUBF4+28KgeGxQfQcZiEfFv/1CyigbA=="
+  "resolved" "https://registry.npmjs.org/swagger-ui-dist/-/swagger-ui-dist-4.1.0.tgz"
+  "version" "4.1.0"
+
 "swagger-ui@^4.1.0":
   "integrity" "sha512-mtpWI/syB0iNHyzE10yEswyBd+aDbYIT4tt90dpI7/bBWmHjIFxZG4OYeDkA6GuKwqsHTu9v8l2ZLY8Maacabw=="
   "resolved" "https://registry.npmjs.org/swagger-ui/-/swagger-ui-4.1.0.tgz"
