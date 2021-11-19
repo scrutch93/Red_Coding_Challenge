@@ -54,9 +54,17 @@ export default function Table() {
     const [tableData, setTableData] = useState([])
 
     useEffect(() => {
-        fetch("https://red-candidate-web.azurewebsites.net/api/Orders")
+        fetch("https://red-candidate-web.azurewebsites.net/api/Orders", {
+  body: "‘",
+  headers: {
+    Accept: "*/*",
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  method: "POST"
+})
         .then((data) => data.json())
-        .then((data) => setTableData (data))
+        .then((data) => console.log (data))
+        //.then((data) => setTableData(data))
     })
        
 
