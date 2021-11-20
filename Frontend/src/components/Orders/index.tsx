@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React,{Component} from 'react';
 import {variables} from '../API/variables';
 
@@ -11,6 +12,9 @@ export class Orders extends React.Component <any, any>{
             modalTitle:"",
             orderType:"",
             orderID:0,
+            customerName:[],
+            createdDate:"",
+            createdByUserName:"",
 
             orderIDFilter:"",
             orderTypeFilter:"",
@@ -50,7 +54,7 @@ export class Orders extends React.Component <any, any>{
         this.setState({orders:sortedData});
     }
 
-    changeDepartmentIdFilter = (e)=>{
+    changeorderIdFilter = (e)=>{
         this.setState({ orderIDFilter: e.target.event.target.value })
         this.FilterFn();
     }
@@ -58,9 +62,9 @@ export class Orders extends React.Component <any, any>{
         this.setState({ orderTypeFilter: e.target.event.target.value })
         this.FilterFn();
     }
-
+   
     refreshList(){
-        fetch(variables.API_URL+'department')
+        fetch(variables.API_URL+'orders')
         .then(response=>response.json())
         .then(data=>{
             this.setState({orders:data,ordersWithoutFilter:data});
@@ -71,34 +75,43 @@ export class Orders extends React.Component <any, any>{
         this.refreshList();
     }
     
-    changeDepartmentName =(e)=>{
+    changeorderType =(e)=>{
         this.setState({ordertype:e.target.value});
     }
 
     addClick(){
         this.setState({
-            modalTitle:"Create Order",
+            modalTitle:"CreateOrder",
             orderID:0,
-            ordertype:""
+            ordertype:"",
+            customerName:[],
+             createdDate:"",
+            createdByUserName:"",
         });
     }
     editClick(dep){
         this.setState({
-            modalTitle:"Edit Department",
-            orderID:dep.orderID,
-            ordertype:dep.ordertype
+            modalTitle:"Edit Order",
+            orderID:0,
+            ordertype:"",
+            customerName:dep.customerName,
+            createdDate:dep.createdDate,
+            
         });
     }
 
     createClick(){
-        fetch(variables.API_URL+'department',{
+        fetch(variables.API_URL+'orders',{
             method:'POST',
             headers:{
                 'Accept':'application/json',
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                ordertype:this.state.ordertype
+                orderType:this.state.orderType,
+                customerName:[],
+                createdDate:"",
+                createdByUserName:"",
             })
         })
         .then(res=>res.json())
@@ -119,8 +132,10 @@ export class Orders extends React.Component <any, any>{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                orderID:this.state.orderID,
-                ordertype:this.state.ordertype
+                orderType:this.state.orderType,
+                customerName:[],
+                createdDate:"",
+                createdByUserName:"",
             })
         })
         .then(res=>res.json())
@@ -134,7 +149,7 @@ export class Orders extends React.Component <any, any>{
 
     deleteClick(id){
         if(window.confirm('Are you sure?')){
-        fetch(variables.API_URL+'department/'+id,{
+        fetch(variables.API_URL+'orders/'+id,{
             method:'DELETE',
             headers:{
                 'Accept':'application/json',
@@ -156,7 +171,10 @@ export class Orders extends React.Component <any, any>{
             orders,
             modalTitle,
             orderID,
-            ordertype
+            ordertype,
+            customerName,
+            createdDate,
+            createdByUserName
         }=this.state;
 
         return(
@@ -177,7 +195,7 @@ export class Orders extends React.Component <any, any>{
 
             
             <input className="form-control m-2"
-            onChange={this.changeDepartmentIdFilter}
+            onChange={this.changeorderIdFilter}
             placeholder="Filter"/>
             
             <button type="button" className="btn btn-light"
@@ -217,19 +235,29 @@ export class Orders extends React.Component <any, any>{
                 </svg>
             </button>
             </div>
-            ordertype
+            OrderType
       
         </th>
         <th>
-            Options
+            Customer
         </th>
+        <th>
+            Date Created
+        </th>
+        <th>
+            CreatedBy
+        </th>  
     </tr>
     </thead>
     <tbody>
         {orders.map(dep=>
             <tr key={dep.orderID}>
                 <td>{dep.orderID}</td>
-                <td>{dep.ordertype}</td>
+                <td>{dep.orderType}</td>
+                <td>{dep.customerName}</td>
+                <td>{dep.createdDate}</td>
+                <td>{dep.createdByUserName}</td>
+
                 <td>
                 <button type="button"
                 className="btn btn-light mr-1"
@@ -244,7 +272,7 @@ export class Orders extends React.Component <any, any>{
 
                 <button type="button"
                 className="btn btn-light mr-1"
-                onClick={()=>this.deleteClick(dep.orderID)}>
+                onClick={()=>this.deleteClick(dep.orderId)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                     </svg>
@@ -270,8 +298,19 @@ export class Orders extends React.Component <any, any>{
         <span className="input-group-text">ordertype</span>
         <input type="text" className="form-control"
         value={ordertype}
-        onChange={this.changeDepartmentName}/>
+        onChange={this.changeorderType}/>
        </div>
+
+       <div className="input-group mb-3">
+        <span className="input-group-text">ordertype</span>
+        <input type="text" className="form-control"
+        value={createdDate}
+        onChange={this.changecreatedDate}/>
+       </div>     
+
+
+
+
 
         {orderID==0?
         <button type="button"
