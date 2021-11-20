@@ -10,14 +10,12 @@ const columns: GridColDef[] = [
   {
     field: 'orderType',
     headerName: 'Order Type',
-    type: 'number',
     width: 110,
     editable: true,
   }, 
   {
     field: 'customerName',
     headerName: 'Customer',
-    type: 'number',
     width: 110,
     editable: true,
   },
@@ -55,13 +53,13 @@ export default function Table() {
 
     useEffect(() => {
         fetch("https://red-candidate-web.azurewebsites.net/api/Orders", {
-  
-  headers: {
-    ApiKey:"b7b77702-b4ec-4960-b3f7-7d40e44cf5f4",
-    Accept: 'application/json'
-  },
-  method: "GET"
-})
+            body: "{\n  "orderId": 0,\n  "orderType": "string",\n  "customerName": "string",\n  "createdDate": "string",\n  "createdByUserName": "string"\n}",
+            headers: {
+              Accept: "*/*",
+              "Content-Type": "application/json-patch+json"
+            },
+            method: "POST"
+          })
         .then((data) => data.json())
         .then((data) => console.log (data))
         //.then((data) => setTableData(data))

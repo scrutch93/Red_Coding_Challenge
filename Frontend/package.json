@@ -59,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/types": "^7.16.0",
     "@types/react-select": "^3.1.1"
   }
 }

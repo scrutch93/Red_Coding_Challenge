@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import Page from "../../components/Page";
 import DropdownSelect from "../../components/DropdownSelect";
 import Header from "../../components/Header"
