@@ -25,7 +25,7 @@ I was able to create a database for some sample data within Microsoft SQL Server
 ![image](https://user-images.githubusercontent.com/80648971/142740457-b3992288-a184-482d-9007-0b7e8b438cec.png)
 
 As you can see, Here is what the frontend currently looks like. I experimeted with material UI, however I ended up sticking with a bootstrap interface. Speaking of Interfaces, implementing both
-component props and user interfaces was interesting. **To see the frontend on the localhost, run npm run start on the frontend folder.**
+component props and user state interfaces was interesting. **To see the frontend on the localhost, run npm run start on the frontend folder.**
 
 ![image](https://user-images.githubusercontent.com/80648971/142740530-d263e546-5e93-4992-9276-7c5710a0cc46.png)
 
